@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Product } from './Model/product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,34 +6,21 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductCheckoutService {
+export class ProductCheckoutService implements OnInit{
 
   public amount:number = 0;
   public shippingAmount:number = 0;
   public totalAmount:number = 0;
   public cart:Product[]
-  public products:Product[]
+  products$;
   apiURL: string = 'http://localhost:56036/api/shoppingCart/';
   
   constructor(private httpClient: HttpClient) {
-    console.log('service constructor called');
     this.cart = [];
-    this.products = [
-      { id: 1, title: 'TV', price: 5 },
-      { id: 2, title: 'Fridge', price: 10 },
-      { id: 3, title: 'Cooker', price: 20 },
-      { id: 4, title: 'Washing Machine', price: 30 },
-      { id: 5, title: 'DVD Player', price: 40 },
-    ];
+    this.products$ = this.getProducts();
+   }
 
-    //this.getProducts()
-                      //.subscribe(productsList => 
-                        //{
-                          //this.products = productsList;
-                        //});
-
-    
-
+   ngOnInit(){
    }
 
    public getProducts():Observable<Product[]>{

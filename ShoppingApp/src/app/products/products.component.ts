@@ -10,18 +10,11 @@ import { JsonPipe } from '@angular/common';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  products:Product[]
   
   constructor(private productService:ProductCheckoutService,private toastrService:ToastrService) { 
-    
-  }
+   }
 
   ngOnInit() {
-    console.log('ProductsComponent ngOnInit');
-    this.products = this.productService.products;
-    console.log(this.productService);
-   
-
   }
 
   AddToCart(product:Product) {

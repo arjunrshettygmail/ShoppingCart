@@ -30,7 +30,7 @@ export class CheckOutComponent implements OnInit {
                              this.productService.shippingAmount = amount;
                              this.productService.totalAmount = this.productService.amount + this.productService.shippingAmount;
                         });
-    }
+  }
 
   RemoveFromCart(index:number) {
     this.productService.cart.splice(index, 1);
@@ -39,8 +39,7 @@ export class CheckOutComponent implements OnInit {
   }
 
   CheckOut(){
-    
-    this.productService.placeOrder(this.productService.cart)
+     this.productService.placeOrder(this.productService.cart)
                        .subscribe(amount => 
                         {
                              this.toastrService.success('Order Placed successfully!');
