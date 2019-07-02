@@ -1,11 +1,65 @@
-<p>
-  check-out works!
-</p>
 
-<button class="btn btn-primary" (click)=CheckOut()>
-  Check Out and Thank You
-</button>
-
+<h1>Basket</h1>
+<div class="card" *ngIf="productService.cart" style="width: 80%;">
+  
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th class="text-center" style="width: 230px">Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of productService.cart;let i = index">
+            <td> 
+              {{ prod.title }}
+            </td>
+            <td class="text-center" style="width: 230px">
+              {{ prod.price  | currency:'AUD':true }}
+            </td>
+            <td class="text-right">
+                <button class="btn btn-link" (click)=RemoveFromCart(i)>
+                    Remove Item
+                </button>
+              
+            </td>
+          </tr>
+          <tr *ngIf="productService.cart.length == 0">
+              <td> 
+                No items in Basket!
+              </td>
+              
+            </tr>
+        </tbody>
+        <tfoot *ngIf="productService.cart.length > 0">
+            <tr>
+              <th>Purchase Amount</th>
+              <th class="text-center" style="width: 230px">{{productService.amount | currency:'AUD':"symbol"}}</th>
+              <th class="text-right"></th>
+            </tr>
+            <tr *ngIf="productService.shippingAmount > 0" >
+              <th>Shipping Cost</th>
+              <th class="text-center" style="width: 230px">{{productService.shippingAmount | currency:'AUD':"symbol"}}</th>
+              <th class="text-right"></th>
+            </tr>
+            <tr *ngIf="productService.totalAmount > 0" >
+                <th>Total Amount</th>
+                <th class="text-center" style="width: 230px">{{productService.totalAmount | currency:'AUD':"symbol"}}</th>
+                <th class="text-right"></th>
+              </tr>
+            <tr *ngIf="productService.totalAmount > 0">
+              
+              <th></th>
+              <th class="text-center" style="width: 230px"><button class="btn btn-success" (click)=CheckOut()>
+                  Place Order
+              </button></th>
+              <th class="text-right"></th>
+            </tr>
+          </tfoot>
+ 
+  </table>
+</div>
 
 
 

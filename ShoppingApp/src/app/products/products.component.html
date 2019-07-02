@@ -1,8 +1,36 @@
-<p>
-  products works!
-</p>
 
-<a routerLinkActive="active" routerLink="checkOut">Check Out</a>
+
+
+<h1>Products</h1>
+<div class="card" *ngIf="productService.products" style="width: 80%;">
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th class="text-center" style="width: 230px">Price</th>
+        <th class="text-right" style="width: 200px"><a class="text-right" class="btn btn-success" *ngIf="productService.cart.length > 0" routerLinkActive="active" routerLink="checkOut">Go to basket</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of products">
+        <td> 
+          {{ prod.title }}
+        </td>
+        <td class="text-center" style="width: 230px">
+          {{ prod.price | currency:'AUD':"symbol" }}
+        </td>
+        <td class="text-right">
+            <button class="btn btn-link" (click)=AddToCart(prod)>
+                Add to Cart
+            </button>
+          
+        </td>
+      </tr>
+    </tbody>
+   </table>
+</div>
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>
