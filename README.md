@@ -1,2 +1,2 @@
 # 
-API for shopping cart
+Angular UI and WebAPI for shopping cart
